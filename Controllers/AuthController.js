@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const AdminModel = require("../Models/Admin");
+const QueryModel = require('../Models/Query');
+const JobModel = require('../Models/Job');
+
 
 
 const signup = async (req, res) => {
@@ -66,7 +69,73 @@ const login = async (req, res) => {
     }
 }
 
+
+const postQuery = async (req, res) => {
+    try {
+        const { name, email, contact, query } = req.body;
+        await QueryModel.create({ name, email, contact, query });
+        res.status(201)
+            .json({
+                message: "Query sent",
+                success: true
+            })
+    } catch (err) {
+        res.status(500)
+            .json({
+                message: "Server errror",
+                success: false
+            })
+    }
+}
+
+
+const postJob = async (req, res) => {
+    try {
+        const { role, description } = req.body;
+        await JobModel.create({ role, description });
+        res.status(201)
+            .json({
+                message: "Job posted",
+                success: true
+            })
+    } catch (err) {
+        res.status(500)
+            .json({
+                message: "Server errror",
+                success: false
+            })
+    }
+}
+
+
+async function getJobs(req,res){
+    try {
+        const jobList = await JobModel.find({});
+        jobList.reverse();
+        return res.status(201).send(jobList);
+
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
+
+async function getQueries(req,res){
+    try {
+        const queryList = await QueryModel.find({});
+        queryList.reverse();
+        return res.status(201).send(queryList);
+
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
 module.exports = {
     signup,
-    login
+    login,
+    postQuery,
+    getQueries,
+    postJob,
+    getJobs
 }
