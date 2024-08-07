@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/auth', AuthRouter);
 app.use('/resumes', express.static("resumes"));
+app.use(express.json());
 
 
 const multer = require('multer');
