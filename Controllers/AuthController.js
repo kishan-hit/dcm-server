@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const AdminModel = require("../Models/Admin");
 const QueryModel = require('../Models/Query');
 const JobModel = require('../Models/Job');
+const ApplicantModel = require('../Models/Applicant')
 
 
 
@@ -131,11 +132,23 @@ async function getQueries(req,res){
     }
 }
 
+async function getApplicants(req,res){
+    try {
+        const applicantList = await ApplicantModel.find({});
+        applicantList.reverse();
+        return res.status(201).send(applicantList);
+
+    } catch (error) {
+        return res.send(error);
+    }
+}
+
 module.exports = {
     signup,
     login,
     postQuery,
     getQueries,
     postJob,
-    getJobs
+    getJobs,
+    getApplicants
 }

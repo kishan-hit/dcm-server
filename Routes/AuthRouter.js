@@ -1,4 +1,4 @@
-const { signup, login, postQuery, getQueries, getJobs, postJob } = require('../Controllers/AuthController');
+const { signup, login, postQuery, getQueries, getJobs, postJob, getApplicants } = require('../Controllers/AuthController');
 const { signupValidation, loginValidation } = require('../Middlewares/AuthValidation');
 
 const router = require('express').Router();
@@ -11,5 +11,6 @@ router.post('/post-job', postJob);
 
 router.get('/get-queries', getQueries);
 router.get('/get-jobs', getJobs);
+router.get('/get-applicants', getApplicants);
 
 module.exports = router;
