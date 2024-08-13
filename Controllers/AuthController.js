@@ -283,6 +283,7 @@ const postJob = async (req, res) => {
 
 
 async function getJobs(req, res) {
+    
     try {
         const jobList = await JobModel.find({});
         jobList.reverse();
@@ -307,9 +308,14 @@ async function getQueries(req, res) {
 
 async function getApplicants(req, res) {
     try {
+        const role = req.query.role;
         const applicantList = await ApplicantModel.find({});
-        applicantList.reverse();
-        return res.status(201).send(applicantList);
+        var result = applicantList.filter(function(e, i) {
+            return e.role == role
+          })
+        
+        result.reverse();
+        return res.status(201).send(result);
 
     } catch (error) {
         return res.send(error);
