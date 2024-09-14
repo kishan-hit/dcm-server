@@ -11,16 +11,17 @@ const ApplicantSchema = new Schema({
         required: true
     },
     email: {
-        type: String,
-        required: true
+        type: String
     },
     contact: {
         type: String,
         required: true
     },
     resume: {
-        type: String,
-        required: true
+        type: String
+    },
+    qualification: {
+        type: String
     }
 },
     {

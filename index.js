@@ -40,6 +40,7 @@ app.post("/post-application",upload.single("resume"), async(req,res) => {
     const name = req.body.name;
     const email = req.body.email;
     const contact = req.body.contact;
+    const qualification = req.body.qualification;
     const fileName = req.file.filename;
 
     try{
@@ -48,6 +49,7 @@ app.post("/post-application",upload.single("resume"), async(req,res) => {
             name: name,
             email: email,
             contact: contact,
+            qualification: qualification,
             resume: fileName
         })
         res.send({status: "ok"});
